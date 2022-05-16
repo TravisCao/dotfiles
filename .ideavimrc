@@ -1,0 +1,106 @@
+"" Source your .vimrc
+"source ~/.vimrc
+
+set scrolloff=5
+set incsearch
+set hlsearch
+set smartcase ignorecase
+set showmode
+set clipboard+=unnamed
+set clipboard+=ideaput
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+
+""" Map leader to space ---------------------
+let mapleader=" "
+
+" easy window navigation
+nnoremap <leader>wl <c-w>l
+nnoremap <leader>wh <c-w>h
+
+nnoremap <leader>wj <c-w>j
+nnoremap <leader>wk <c-w>k
+
+nnoremap <leader><cr> :nohlsearch<cr>
+
+
+" built-in navigation works better
+nnoremap <c-o> :action Back<cr>
+nnoremap <c-i> :action Forward<cr>
+
+" nnoremap / :action Find<cr>
+
+nnoremap <leader><leader> :action SearchEverywhere<cr>
+nnoremap <leader>E :action Switcher<cr>
+nnoremap <leader>gs :action GotoSymbol<cr>
+nnoremap <leader>gt :action GotoTest<cr>
+nnoremap <leader>ga :action GotoAction<cr>
+nnoremap <leader>gu :action FindUsages<cr>
+nnoremap <leader>gc :action GotoClass<cr>
+nnoremap <leader>gs :action GotoSuperMethod<cr>
+nnoremap <leader>gi :action GotoImplementation<cr>
+
+nnoremap <leader>ff :action GotoFile<cr>
+nnoremap <leader>fr :action RecentFiles<cr>
+
+nnoremap <leader>tb :action ToggleLineBreakpoint<cr>
+nnoremap <leader>ts :action ShowSettings<cr>
+nnoremap <leader>th :action HideAllWindows<cr>
+nnoremap <leader>tt :action ActivateTerminalToolWindow<cr>
+nnoremap <leader>td :action ActivateDebugToolWindow<cr>
+nnoremap <leader>tr :action ActivateRunToolWindow<cr>
+nnoremap <leader>tq :action ToggleDistractionFreeMode<cr>
+nnoremap <leader>tm :action ToggleBookmark<cr>
+
+nnoremap <leader>ps :action ShowProjectStructureSettings<cr>
+nnoremap <leader>pg :action ActivateVersionControlToolWindow<cr>
+
+nnoremap <leader>ri :action OptimizeImorts <cr>
+nnoremap <leader>rr :action ReformatCode<cr>
+nnoremap <leader>rs :action RenameElement<cr>
+nnoremap <leader>rf :action RenameFile<cr>
+
+nnoremap <leader>xr :action Run<cr>
+nnoremap <leader>xd :action Debug<cr>
+
+
+nnoremap <leader>bp :bp<cr>
+nnoremap <leader>bn :bn<cr>
+
+
+nnoremap [t gT " prev tab
+nnoremap ]t gt " next tab
+nnoremap [s :action GotoPrevElementUnderCaretUsage<cr>
+nnoremap ]s :action GotoNextElementUnderCaretUsage<cr>
+nnoremap ]e :action GotoNextError<cr>
+nnoremap [e :action GotoPreviousError<cr>
+nnoremap [m :action MethodUp<cr>
+nnoremap ]m :action MethodDown<cr>
+
+""" Plugins  --------------------------------
+set surround
+set ideamarks
+set ideajoin
+set multiple-cursors
+set commentary
+set argtextobj
+set textobj-entire
+set ReplaceWithRegister
+set exchange
+
+""" Plugin settings -------------------------
+let g:argtextobj_pairs="[:],(:),<:>"
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+
+
+" Find more examples here: https://jb.gg/share-ideavimrc

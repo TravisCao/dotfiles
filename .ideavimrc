@@ -26,8 +26,8 @@ nnoremap <leader><cr> :nohlsearch<cr>
 
 
 " built-in navigation works better
-nnoremap <c-o> :action Back<cr>
-nnoremap <c-i> :action Forward<cr>
+" nnoremap <c-o> :action Back<cr>
+" nnoremap <c-i> :action Forward<cr>
 
 " nnoremap / :action Find<cr>
 
@@ -66,10 +66,6 @@ nnoremap <leader>xr :action Run<cr>
 nnoremap <leader>xd :action Debug<cr>
 
 
-nnoremap <leader>bp :bp<cr>
-nnoremap <leader>bn :bn<cr>
-
-
 nnoremap [t gT " prev tab
 nnoremap ]t gt " next tab
 nnoremap [s :action GotoPrevElementUnderCaretUsage<cr>
@@ -78,6 +74,8 @@ nnoremap ]e :action GotoNextError<cr>
 nnoremap [e :action GotoPreviousError<cr>
 nnoremap [m :action MethodUp<cr>
 nnoremap ]m :action MethodDown<cr>
+nnoremap [b :bp<cr>
+nnoremap ]b :bn<cr>
 
 """ Plugins  --------------------------------
 set surround

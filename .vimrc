@@ -17,6 +17,7 @@ filetype indent on
 autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab number autoindent
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab autoindent
 autocmd FileType cpp setlocal ts=4 sts=4 sw=4 expandtab number autoindent smartindent
+autocmd FileType c setlocal ts=2 sts=2 sw=2 expandtab number autoindent smartindent
 
 " folding can help troubleshoot indentation syntax
 set foldenable

@@ -43,7 +43,6 @@ nnoremap <leader>gi :action GotoImplementation<cr>
 
 nnoremap <leader>ff :action GotoFile<cr>
 nnoremap <leader>fr :action RecentFiles<cr>
-nnoremap <leader>fn :action NewClass<cr>
 
 nnoremap <leader>tb :action ToggleLineBreakpoint<cr>
 nnoremap <leader>ts :action ShowSettings<cr>
@@ -56,6 +55,7 @@ nnoremap <leader>tm :action ToggleBookmark<cr>
 
 nnoremap <leader>ps :action ShowProjectStructureSettings<cr>
 nnoremap <leader>pg :action ActivateVersionControlToolWindow<cr>
+nnoremap <leader>ps :action FindInPath<cr>
 
 nnoremap <leader>ri :action OptimizeImorts <cr>
 nnoremap <leader>rr :action ReformatCode<cr>

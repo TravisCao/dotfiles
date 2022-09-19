@@ -1,0 +1,7 @@
+[user]
+	name = Travis Cao
+	email = travisyjcao@gmail.com
+[credential]
+	helper = 
+[credential "https://dev.azure.com"]
+	useHttpPath = true

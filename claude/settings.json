@@ -27,7 +27,7 @@
       "Bash(mkdir:*)"
     ]
   },
-  "model": "opusplan",
+  "model": "opus",
   "statusLine": {
     "type": "command",
     "command": "npx -y ccstatusline@latest",

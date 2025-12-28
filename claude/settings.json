@@ -1,8 +1,30 @@
 {
   "permissions": {
+    "defaultMode": "acceptEdits",
+    "ask": [
+      "Bash(rm:*)",
+      "Bash(rmdir:*)",
+      "Bash(trash:*)"
+    ],
+    "deny": [
+      "Read(./.env*)",
+      "Read(./secrets/**)",
+      "Read(./**/*.key)",
+      "Read(./**/*.pem)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Edit(./.env*)",
+      "Edit(./secrets/**)"
+    ],
     "allow": [
       "mcp__serena__*",
-      "mcp__context7__*"
+      "mcp__context7__*",
+      "Bash(npm:*)",
+      "Bash(git:*)",
+      "Bash(node:*)",
+      "Bash(python:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)"
     ]
   },
   "model": "opusplan",

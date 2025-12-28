@@ -92,6 +92,7 @@ backup_and_link "$DOTFILES_DIR/tmux/tmux.conf" "$HOME/.tmux.conf"
 mkdir -p "$HOME/.claude"
 backup_and_link "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 backup_and_link "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
+backup_and_link "$DOTFILES_DIR/claude/agents" "$HOME/.claude/agents"
 
 # Ghostty configuration
 mkdir -p "$HOME/.config/ghostty"

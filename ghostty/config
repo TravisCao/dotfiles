@@ -1,0 +1,13 @@
+# 字体设置
+font-family = Maple Mono NF CN
+font-size = 16
+
+# 窗口边距
+window-padding-x = 10
+window-padding-y = 10
+
+# Shell 集成
+shell-integration = detect
+
+# Quick Terminal - 全局快捷键调出终端
+keybind = global:ctrl+`=toggle_quick_terminal

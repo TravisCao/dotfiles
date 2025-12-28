@@ -93,6 +93,10 @@ mkdir -p "$HOME/.claude"
 backup_and_link "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 backup_and_link "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
 
+# Ghostty configuration
+mkdir -p "$HOME/.config/ghostty"
+backup_and_link "$DOTFILES_DIR/ghostty/config" "$HOME/.config/ghostty/config"
+
 echo "✅ Dotfiles installation completed!"
 echo "📦 Backups stored in: $backup_dir"
 echo "🔄 Please restart your shell or run 'source ~/.zshrc' to apply changes"

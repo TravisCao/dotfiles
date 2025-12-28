@@ -94,6 +94,10 @@ backup_and_link "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 backup_and_link "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
 backup_and_link "$DOTFILES_DIR/claude/agents" "$HOME/.claude/agents"
 
+# Codex configuration
+mkdir -p "$HOME/.codex"
+backup_and_link "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml"
+
 # Ghostty configuration
 mkdir -p "$HOME/.config/ghostty"
 backup_and_link "$DOTFILES_DIR/ghostty/config" "$HOME/.config/ghostty/config"

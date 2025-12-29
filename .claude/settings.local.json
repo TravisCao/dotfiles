@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/home/yjcao/**)",
+      "Bash(command -v:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

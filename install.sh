@@ -88,6 +88,13 @@ backup_and_link "$DOTFILES_DIR/shell/bashrc" "$HOME/.bashrc"
 # Tmux configuration
 backup_and_link "$DOTFILES_DIR/tmux/tmux.conf" "$HOME/.tmux.conf"
 
+# Git configuration
+backup_and_link "$DOTFILES_DIR/git/gitconfig" "$HOME/.gitconfig"
+backup_and_link "$DOTFILES_DIR/git/gitignore_global" "$HOME/.gitignore_global"
+
+# Set global gitignore
+git config --global core.excludesfile ~/.gitignore_global
+
 # Claude configuration
 mkdir -p "$HOME/.claude"
 backup_and_link "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"

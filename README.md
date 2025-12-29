@@ -6,6 +6,7 @@ Personal configuration files for development environment.
 
 - **shell/**: Zsh and Bash configurations
 - **tmux/**: Tmux configuration
+- **git/**: Git configuration and global gitignore
 - **claude/**: Claude Code settings and global instructions
 
 ## Installation
@@ -27,6 +28,11 @@ ln -sf ~/dotfiles/shell/bashrc ~/.bashrc
 
 # Tmux config
 ln -sf ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
+
+# Git config
+ln -sf ~/dotfiles/git/gitconfig ~/.gitconfig
+ln -sf ~/dotfiles/git/gitignore_global ~/.gitignore_global
+git config --global core.excludesfile ~/.gitignore_global
 
 # Claude config
 mkdir -p ~/.claude

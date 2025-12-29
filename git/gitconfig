@@ -1,0 +1,48 @@
+[user]
+	name = Yuji Cao
+	email = travisyjcao@gmail.com
+
+[core]
+	editor = code --wait
+	autocrlf = false
+	filemode = false
+	ignorecase = false
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = true
+
+[push]
+	default = simple
+	autoSetupRemote = true
+
+[merge]
+	tool = vscode
+
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
+
+[diff]
+	tool = vscode
+
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+
+[color]
+	ui = auto
+
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

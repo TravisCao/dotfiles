@@ -93,6 +93,8 @@ mkdir -p "$HOME/.claude"
 backup_and_link "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 backup_and_link "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
 backup_and_link "$DOTFILES_DIR/claude/agents" "$HOME/.claude/agents"
+backup_and_link "$DOTFILES_DIR/claude/commands" "$HOME/.claude/commands"
+backup_and_link "$DOTFILES_DIR/claude/skills" "$HOME/.claude/skills"
 
 # Codex configuration
 mkdir -p "$HOME/.codex"

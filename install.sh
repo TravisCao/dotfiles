@@ -5,7 +5,7 @@
 
 set -e
 
-DOTFILES_DIR="$HOME/dotfiles"
+DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 echo "🔧 Installing dotfiles..."
 

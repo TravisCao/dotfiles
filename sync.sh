@@ -5,13 +5,13 @@
 
 set -e
 
-DOTFILES_DIR="$HOME/dotfiles"
+DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$DOTFILES_DIR"
 
 echo "🔄 Syncing dotfiles..."
 
 # Check if there are changes
-if git diff --quiet && git diff --cached --quiet; then
+if [ -z "$(git status --porcelain)" ]; then
     echo "✅ No changes to sync"
     exit 0
 fi

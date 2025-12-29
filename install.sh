@@ -97,6 +97,7 @@ backup_and_link "$DOTFILES_DIR/claude/agents" "$HOME/.claude/agents"
 # Codex configuration
 mkdir -p "$HOME/.codex"
 backup_and_link "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml"
+backup_and_link "$DOTFILES_DIR/codex/skills" "$HOME/.codex/skills"
 
 # Ghostty configuration
 mkdir -p "$HOME/.config/ghostty"

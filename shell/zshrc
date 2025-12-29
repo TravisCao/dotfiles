@@ -85,6 +85,12 @@ plugins=(git z)
 
 # User configuration
 
+# Ensure Claude skills directory is symlinked to dotfiles
+if [ -d "$HOME/.claude/skills" ] && [ ! -L "$HOME/.claude/skills" ]; then
+    rm -rf "$HOME/.claude/skills"
+    ln -s "$HOME/dotfiles/claude/skills" "$HOME/.claude/skills"
+fi
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment

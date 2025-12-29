@@ -1,10 +1,14 @@
 {
   "permissions": {
-    "defaultMode": "acceptEdits",
-    "ask": [
-      "Bash(rm:*)",
-      "Bash(rmdir:*)",
-      "Bash(trash:*)"
+    "allow": [
+      "mcp__serena__*",
+      "mcp__context7__*",
+      "Bash(npm:*)",
+      "Bash(git:*)",
+      "Bash(node:*)",
+      "Bash(python:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)"
     ],
     "deny": [
       "Read(./.env*)",
@@ -16,18 +20,13 @@
       "Edit(./.env*)",
       "Edit(./secrets/**)"
     ],
-    "allow": [
-      "mcp__serena__*",
-      "mcp__context7__*",
-      "Bash(npm:*)",
-      "Bash(git:*)",
-      "Bash(node:*)",
-      "Bash(python:*)",
-      "Bash(ls:*)",
-      "Bash(mkdir:*)"
-    ]
+    "ask": [
+      "Bash(rm:*)",
+      "Bash(rmdir:*)",
+      "Bash(trash:*)"
+    ],
+    "defaultMode": "acceptEdits"
   },
-  "model": "opus",
   "statusLine": {
     "type": "command",
     "command": "npx -y ccstatusline@latest",

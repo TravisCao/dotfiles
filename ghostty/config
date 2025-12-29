@@ -11,3 +11,6 @@ shell-integration = detect
 
 # Quick Terminal - 全局快捷键调出终端
 keybind = global:ctrl+`=toggle_quick_terminal
+
+# 终端类型
+term = xterm-256color

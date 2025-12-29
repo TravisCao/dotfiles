@@ -74,6 +74,28 @@ where $x$ is [meaning], $y$ represents [meaning], and $z$ denotes [meaning].
 - Explain quantum computing concepts when needed (many power systems researchers won't know)
 - Balance rigor with readability - derivations in appendix if too long
 
+### Proof Writing Style
+- **No numbered step headers** - avoid `\textbf{Step 1 (Name).}` format
+- Write proofs as continuous prose with natural paragraph breaks
+- Each logical step flows into the next without explicit numbering
+- Use transition phrases like "Since...", "By...", "Hence...", "Therefore..."
+
+**Bad:**
+```latex
+\textbf{Step 1 (Bound X).} We have...
+\textbf{Step 2 (Bound Y).} Using Step 1...
+```
+
+**Good:**
+```latex
+Since $\mathcal{E}_p(\rho) = (1-p)\rho + pI/D$, we have... By homogeneity of the trace norm,
+[equation]
+
+For each feature coordinate, ... By Hölder's inequality,
+[equation]
+Hence $\|h\|_\infty \le ...$
+```
+
 ## Common Patterns for Power Systems + Quantum
 
 1. **Start with classical formulation**

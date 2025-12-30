@@ -24,7 +24,6 @@ declare -a LINK_MAP=(
     "git/gitignore_global:$HOME/.gitignore_global"
     # Claude
     "claude/CLAUDE.md:$HOME/.claude/CLAUDE.md"
-    "claude/settings.json:$HOME/.claude/settings.json"
     "claude/agents:$HOME/.claude/agents"
     "claude/commands:$HOME/.claude/commands"
     "claude/skills:$HOME/.claude/skills"

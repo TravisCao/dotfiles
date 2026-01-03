@@ -62,3 +62,10 @@ fi
 if [ -d ~/dotfiles ] && [ -n "$(git -C ~/dotfiles status --porcelain 2>/dev/null)" ]; then
     echo "💡 dotfiles 有未同步的改动，运行 ~/dotfiles/sync.sh push"
 fi
+
+# bun completions
+[ -s "/Users/travis/.bun/_bun" ] && source "/Users/travis/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

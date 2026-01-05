@@ -63,7 +63,7 @@ if [[ "$OS" == "macos" ]]; then
 else
     # Ubuntu/Debian - use apt where possible
     echo "  Installing apt packages..."
-    sudo apt install -y fzf fd-find bat curl unzip lsd git-delta zoxide
+    sudo apt install -y fzf fd-find bat curl unzip lsd git-delta zoxide software-properties-common
 
     # lazygit (requires PPA)
     if ! command -v lazygit &>/dev/null; then

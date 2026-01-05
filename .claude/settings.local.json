@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Read(/home/yjcao/**)",
-      "Bash(command -v:*)"
+      "Bash(command -v:*)",
+      "WebSearch",
+      "Skill(commit)"
     ],
     "deny": [],
     "ask": []

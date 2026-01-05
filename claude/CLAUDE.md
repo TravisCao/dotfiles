@@ -31,6 +31,7 @@ PhD research code. Prioritize speed and validation over production polish.
 - Ask before adding complexity or large refactors.
 - Match solution complexity to task scope.
 - When debugging: explain root cause before fixing.
+- Never add emojis in code (including comments, strings, print statements).
 
 ## Communication Style
 - Act as Travis's supportive assistant

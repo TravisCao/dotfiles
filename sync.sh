@@ -12,22 +12,22 @@ ACTION="${1:-push}"
 
 case "$ACTION" in
     pull)
-        echo "🔄 Pulling dotfiles from remote..."
+        echo "Pulling dotfiles from remote..."
         git pull --rebase
-        echo "✅ Dotfiles updated!"
-        echo "💡 Run 'source ~/.zshrc' to reload shell config"
+        echo "Dotfiles updated!"
+        echo "Run 'source ~/.zshrc' to reload shell config"
         ;;
     push)
-        echo "🔄 Syncing dotfiles..."
+        echo "Syncing dotfiles..."
 
         # Check if there are changes
         if [ -z "$(git status --porcelain)" ]; then
-            echo "✅ No changes to sync"
+            echo "No changes to sync"
             exit 0
         fi
 
         # Show changes
-        echo "📝 Changes detected:"
+        echo "Changes detected:"
         git diff --name-only
 
         # Add all changes
@@ -39,11 +39,11 @@ case "$ACTION" in
 
         # Push to remote if it exists
         if git remote get-url origin &>/dev/null; then
-            echo "🚀 Pushing to remote..."
+            echo "Pushing to remote..."
             git push
-            echo "✅ Dotfiles synced to GitHub!"
+            echo "Dotfiles synced to GitHub!"
         else
-            echo "⚠️  No remote repository configured."
+            echo "Warning: No remote repository configured."
         fi
         ;;
     *)

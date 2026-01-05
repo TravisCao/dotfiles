@@ -42,18 +42,18 @@ link_file() {
 
     # Skip if source doesn't exist
     if [ ! -e "$source" ]; then
-        echo "⏭️  Skip: $1 (not found)"
+        echo "Skip: $1 (not found)"
         return
     fi
 
     # Check if already correctly linked
     if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
-        echo "✓  OK: $1 -> $target"
+        echo "[ok] $1 -> $target"
         return
     fi
 
     if $DRY_RUN; then
-        echo "🔗 Would link: $1 -> $target"
+        echo "Would link: $1 -> $target"
         return
     fi
 
@@ -66,7 +66,7 @@ link_file() {
             mkdir -p "$BACKUP_DIR"
             backup_created=true
         fi
-        echo "📦 Backup: $target -> $BACKUP_DIR/"
+        echo "Backup: $target -> $BACKUP_DIR/"
         mv "$target" "$BACKUP_DIR/"
     fi
 
@@ -75,10 +75,10 @@ link_file() {
 
     # Create symlink
     ln -sf "$source" "$target"
-    echo "🔗 Linked: $1 -> $target"
+    echo "Linked: $1 -> $target"
 }
 
-echo "🔍 Scanning dotfiles..."
+echo "Scanning dotfiles..."
 $DRY_RUN && echo "(dry-run mode)"
 echo ""
 
@@ -95,7 +95,7 @@ fi
 
 echo ""
 if $backup_created; then
-    echo "📁 Backups saved to: $BACKUP_DIR"
+    echo "Backups saved to: $BACKUP_DIR"
 fi
-echo "✅ Done!"
-$DRY_RUN && echo "💡 Run without --dry-run to apply changes"
+echo "Done!"
+$DRY_RUN && echo "Run without --dry-run to apply changes"

@@ -76,10 +76,10 @@ else
         echo "  [ok] lazygit"
     fi
 
-    # atuin (use snap for reliability)
+    # atuin
     if ! command -v atuin &>/dev/null; then
-        echo "  Installing atuin via snap..."
-        sudo snap install atuin
+        echo "  Installing atuin..."
+        curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
     else
         echo "  [ok] atuin"
     fi

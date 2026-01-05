@@ -21,7 +21,7 @@ plugins=(git fzf zoxide)
 [ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
 
 # Environment
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.atuin/bin:$PATH"
 export NODE_OPTIONS="--max-old-space-size=8192"
 
 # Modern CLI tools

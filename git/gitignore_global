@@ -55,9 +55,8 @@ env/
 */.ipynb_checkpoints/*
 
 # Research data and results
-data/
+# data/  # commented out - need to track some data files
 results/
-experiments/
 logs/
 *.log
 *.out

@@ -82,6 +82,15 @@ fi
 # bun completions
 [ -s "/Users/travis/.bun/_bun" ] && source "/Users/travis/.bun/_bun"
 
+# Added by Antigravity
+export PATH="/Users/travis/.antigravity/antigravity/bin:$PATH"
+
+# opencode
+export PATH=/home/yjcao/.opencode/bin:$PATH
+
+# bun completions
+[ -s "/home/yjcao/.bun/_bun" ] && source "/home/yjcao/.bun/_bun"
+
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"

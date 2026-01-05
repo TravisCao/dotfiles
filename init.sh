@@ -83,6 +83,22 @@ else
     else
         echo "  [ok] atuin"
     fi
+
+    # claude code
+    if ! command -v claude &>/dev/null; then
+        echo "  Installing claude code..."
+        curl -fsSL https://claude.ai/install.sh | bash
+    else
+        echo "  [ok] claude"
+    fi
+
+    # opencode
+    if ! command -v opencode &>/dev/null; then
+        echo "  Installing opencode..."
+        curl -fsSL https://opencode.ai/install | bash
+    else
+        echo "  [ok] opencode"
+    fi
 fi
 
 # Create symlinks using dotlink.sh

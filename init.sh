@@ -63,14 +63,15 @@ if [[ "$OS" == "macos" ]]; then
 else
     # Ubuntu/Debian - use apt where possible
     echo "  Installing apt packages..."
-    sudo apt install -y fzf fd-find bat curl unzip lsd git-delta zoxide software-properties-common
+    sudo apt install -y fzf fd-find bat curl unzip lsd git-delta zoxide
 
-    # lazygit (requires PPA)
+    # lazygit (direct download)
     if ! command -v lazygit &>/dev/null; then
-        echo "  Installing lazygit via PPA..."
-        sudo add-apt-repository -y ppa:lazygit-team/release
-        sudo apt update
-        sudo apt install -y lazygit
+        echo "  Installing lazygit..."
+        curl -sLO https://github.com/jesseduffield/lazygit/releases/download/v0.58.0/lazygit_0.58.0_Linux_x86_64.tar.gz
+        tar xf lazygit_*.tar.gz lazygit
+        sudo mv lazygit /usr/local/bin/
+        rm lazygit_*.tar.gz
     else
         echo "  [ok] lazygit"
     fi

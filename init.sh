@@ -63,7 +63,27 @@ if [[ "$OS" == "macos" ]]; then
 else
     # Ubuntu/Debian - use apt where possible
     echo "  Installing apt packages..."
-    sudo apt install -y fzf fd-find bat curl unzip lsd git-delta zoxide
+    sudo apt install -y fzf fd-find bat curl unzip zoxide
+
+    # git-delta (direct download from GitHub)
+    if ! command -v delta &>/dev/null; then
+        echo "  Installing git-delta..."
+        curl -sLO https://github.com/dandavison/delta/releases/download/0.18.2/git-delta_0.18.2_amd64.deb
+        sudo dpkg -i git-delta_0.18.2_amd64.deb
+        rm git-delta_0.18.2_amd64.deb
+    else
+        echo "  [ok] git-delta"
+    fi
+
+    # lsd (direct download from GitHub)
+    if ! command -v lsd &>/dev/null; then
+        echo "  Installing lsd..."
+        curl -sLO https://github.com/lsd-rs/lsd/releases/download/v1.2.0/lsd_1.2.0_amd64.deb
+        sudo dpkg -i lsd_1.2.0_amd64.deb
+        rm lsd_1.2.0_amd64.deb
+    else
+        echo "  [ok] lsd"
+    fi
 
     # lazygit (direct download)
     if ! command -v lazygit &>/dev/null; then

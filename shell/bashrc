@@ -122,3 +122,6 @@ fi
 [ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+eval "$(atuin init bash)"

@@ -36,9 +36,19 @@ case "$ACTION" in
             exit 0
         fi
 
-        # Show changes
+        # Show changes with delta highlighting
         echo "Changes detected:"
-        git diff --name-only
+        echo "---"
+        git diff --color=always | delta --paging=never
+        echo "---"
+
+        # Ask for confirmation
+        read -p "Push these changes? [y/N] " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            echo "Aborted."
+            exit 0
+        fi
 
         # Add all changes
         git add .

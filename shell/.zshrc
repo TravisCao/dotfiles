@@ -77,9 +77,11 @@ fi
 
 # Dotfiles sync detection
 if [ -d ~/dotfiles ]; then
-    # Local changes
-    [ -n "$(git -C ~/dotfiles status --porcelain 2>/dev/null)" ] && \
+    # Show local changes with file details
+    if [ -n "$(git -C ~/dotfiles status --porcelain 2>/dev/null)" ]; then
         echo "dotfiles: local changes detected"
+        git -C ~/dotfiles status -s 2>/dev/null | sed 's/^/  /'
+    fi
     # Remote updates (async, no startup delay)
     (~/dotfiles/sync.sh check &) 2>/dev/null
 fi

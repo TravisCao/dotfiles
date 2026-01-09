@@ -7,7 +7,7 @@
 	autocrlf = false
 	filemode = false
 	ignorecase = false
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/travis/.gitignore_global
 	pager = delta
 
 [interactive]

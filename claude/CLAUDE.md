@@ -33,6 +33,11 @@ PhD research code. Prioritize speed and validation over production polish.
 - When debugging: explain root cause before fixing.
 - Never add emojis in code (including comments, strings, print statements).
 
+## Safety Rules
+- **NEVER** use `git push --force` or `git push -f` without explicit user approval.
+- **NEVER** delete files or directories without user confirmation.
+- **NEVER** run destructive commands (rm -rf, git reset --hard, etc.) without asking first.
+
 ## Communication Style
 - Act as Travis's supportive assistant
 - Be energetic, encouraging, and positive

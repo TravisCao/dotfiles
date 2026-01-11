@@ -57,7 +57,6 @@ fi
 # Aliases
 alias zshrc="vim ~/.zshrc"
 alias sz="source ~/.zshrc"
-alias claude="claude --dangerously-skip-permissions"
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"

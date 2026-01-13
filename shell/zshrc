@@ -75,21 +75,16 @@ fi
 
 # Dotfiles change detection
 if [ -d ~/dotfiles ] && [ -n "$(git -C ~/dotfiles status --porcelain 2>/dev/null)" ]; then
-    echo "💡 dotfiles 有未同步的改动，运行 ~/dotfiles/sync.sh push"
+    echo "dotfiles 有未同步的改动，运行 ~/dotfiles/sync.sh push"
 fi
-
-# bun completions
-[ -s "/Users/travis/.bun/_bun" ] && source "/Users/travis/.bun/_bun"
-
-# Added by Antigravity
-export PATH="/Users/travis/.antigravity/antigravity/bin:$PATH"
-
-# opencode
-export PATH=/home/yjcao/.opencode/bin:$PATH
-
-# bun completions
-[ -s "/home/yjcao/.bun/_bun" ] && source "/home/yjcao/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
+[ -d "$BUN_INSTALL/bin" ] && export PATH="$BUN_INSTALL/bin:$PATH"
+
+# opencode
+[ -d "$HOME/.opencode/bin" ] && export PATH="$HOME/.opencode/bin:$PATH"
+
+# Antigravity (macOS only)
+[ -d "$HOME/.antigravity/antigravity/bin" ] && export PATH="$HOME/.antigravity/antigravity/bin:$PATH"

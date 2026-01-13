@@ -12,17 +12,44 @@ echo "Initializing dotfiles..."
 # Detect OS
 if [[ "$OSTYPE" == "darwin"* ]]; then
     OS="macos"
-    # Check if Homebrew is installed
-    if ! command -v brew &> /dev/null; then
-        echo "Installing Homebrew..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    fi
+    HOMEBREW_PREFIX="/opt/homebrew"
 else
     OS="linux"
+    HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
     sudo apt update
 fi
 
 echo "Detected OS: $OS"
+
+# Install Homebrew (both macOS and Linux)
+if ! command -v brew &> /dev/null; then
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    # Add Homebrew to PATH for current session
+    eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
+
+    # Create .zshrc.local for Linux with Homebrew PATH
+    if [[ "$OS" == "linux" ]]; then
+        ZSHRC_LOCAL="$HOME/.zshrc.local"
+        if [ ! -f "$ZSHRC_LOCAL" ]; then
+            echo "Creating $ZSHRC_LOCAL..."
+            cat > "$ZSHRC_LOCAL" << 'EOF'
+# Machine-specific configurations
+
+# Homebrew (Linux)
+[ -d /home/linuxbrew/.linuxbrew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+EOF
+        elif ! grep -q "linuxbrew" "$ZSHRC_LOCAL"; then
+            echo "Adding Homebrew to $ZSHRC_LOCAL..."
+            echo '' >> "$ZSHRC_LOCAL"
+            echo '# Homebrew (Linux)' >> "$ZSHRC_LOCAL"
+            echo '[ -d /home/linuxbrew/.linuxbrew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> "$ZSHRC_LOCAL"
+        fi
+    fi
+else
+    echo "[ok] Homebrew already installed"
+fi
 
 # Install zsh if not present
 if ! command -v zsh &> /dev/null; then
@@ -104,10 +131,10 @@ else
         echo "  [ok] atuin"
     fi
 
-    # claude code
+    # claude code (use brew)
     if ! command -v claude &>/dev/null; then
-        echo "  Installing claude code..."
-        curl -fsSL https://claude.ai/install.sh | bash
+        echo "  Installing claude code via brew..."
+        brew install --cask claude-code
     else
         echo "  [ok] claude"
     fi

@@ -4,7 +4,7 @@ Personal configuration files for development environment.
 
 ## Contents
 
-- **shell/**: Zsh and Bash configurations
+- **shell/**: Zsh configurations (ZDOTDIR architecture)
 - **tmux/**: Tmux configuration
 - **git/**: Git configuration and global gitignore
 - **claude/**: Claude Code settings and global instructions
@@ -14,58 +14,71 @@ Personal configuration files for development environment.
 ```bash
 git clone https://github.com/TravisCao/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-./install.sh
+./init.sh
 ```
 
-## Manual Installation
+## Architecture
 
-If you prefer to set up manually:
+This dotfiles uses **ZDOTDIR** to separate shared and local configurations:
 
-```bash
-# Shell configs
-ln -sf ~/dotfiles/shell/zshrc ~/.zshrc
-ln -sf ~/dotfiles/shell/bashrc ~/.bashrc
-
-# Tmux config
-ln -sf ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
-
-# Git config
-ln -sf ~/dotfiles/git/gitconfig ~/.gitconfig
-ln -sf ~/dotfiles/git/gitignore_global ~/.gitignore_global
-git config --global core.excludesfile ~/.gitignore_global
-
-# Claude config
-mkdir -p ~/.claude
-ln -sf ~/dotfiles/claude/CLAUDE.md ~/.claude/CLAUDE.md
-ln -sf ~/dotfiles/claude/settings.json ~/.claude/settings.json
 ```
+~/.zshenv          -> ~/dotfiles/shell/.zshenv (sets ZDOTDIR)
+                          |
+                          v
+~/dotfiles/shell/.zshrc   (shared config, git-tracked)
+                          |
+                          v
+~/.zshrc                  (local config, NOT git-tracked)
+```
+
+**Benefits**:
+- Tools that auto-modify `.zshrc` write to `~/.zshrc` (local), not polluting shared config
+- Shared config stays clean and syncs across machines via git
+- No merge conflicts between machines
 
 ## Machine-Specific Configuration
 
-The dotfiles support machine-specific configurations through local override files:
+Local configurations go in `~/.zshrc` (created automatically by `init.sh`):
 
-1. **Create your local config file:**
-   ```bash
-   cp ~/dotfiles/shell/zshrc.local.example ~/.zshrc.local
-   ```
+```bash
+# Example ~/.zshrc (local)
 
-2. **Edit `~/.zshrc.local` to add machine-specific settings:**
-   - Software paths (e.g., Gurobi, MATLAB)
-   - Custom aliases
-   - Environment variables
-   - Machine-specific PATH additions
+# Homebrew (Linux)
+[ -d /home/linuxbrew/.linuxbrew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-3. **Example configurations:**
-   ```bash
-   # Gurobi solver
-   export GUROBI_HOME=/opt/gurobi1201/linux64
-   export PATH="$GUROBI_HOME/bin:$PATH"
-   
-   # Custom aliases
-   alias myproject="cd /path/to/my/project"
-   ```
+# Gurobi solver
+export GUROBI_HOME=/opt/gurobi1201/linux64
+export PATH="$GUROBI_HOME/bin:$PATH"
 
-The `~/.zshrc.local` file is automatically loaded by the main zshrc and is ignored by git, so you can customize it freely without affecting the shared configuration.
+# Custom aliases
+alias myproject="cd /path/to/my/project"
+```
+
+This file is:
+- Automatically sourced by the shared config
+- NOT tracked by git
+- Safe for tools to auto-modify (bun, nvm, etc.)
+
+## Syncing
+
+```bash
+# Push local changes
+~/dotfiles/sync.sh push "commit message"
+
+# Pull remote updates
+~/dotfiles/sync.sh pull
+```
+
+Shell startup automatically detects:
+- Local uncommitted changes
+- Remote updates available
+
+## Migration from Old Setup
+
+If you have an existing symlink-based setup, `init.sh` will automatically:
+1. Remove old `~/.zshrc` symlink
+2. Move `~/.zshrc.local` to `~/.zshrc`
+3. Create `~/.zshenv` symlink
 
 ## Backup
 

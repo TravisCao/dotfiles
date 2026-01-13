@@ -14,8 +14,9 @@ BACKUP_DIR="$HOME/.dotfiles_backup_$(date +%Y%m%d_%H%M%S)"
 # Mapping: dotfiles_path -> target_path
 # Format: "source:target"
 declare -a LINK_MAP=(
-    # Shell
-    "shell/zshrc:$HOME/.zshrc"
+    # Shell - ZDOTDIR architecture
+    # ~/.zshenv sets ZDOTDIR, then zsh reads .zshrc from ~/dotfiles/shell/
+    "shell/.zshenv:$HOME/.zshenv"
     "shell/bashrc:$HOME/.bashrc"
     # Tmux
     "tmux/tmux.conf:$HOME/.tmux.conf"

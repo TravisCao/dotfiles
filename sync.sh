@@ -11,11 +11,21 @@ cd "$DOTFILES_DIR"
 ACTION="${1:-push}"
 
 case "$ACTION" in
+    check)
+        # Check for remote updates (called from zshrc)
+        git fetch origin --quiet 2>/dev/null || exit 0
+        LOCAL=$(git rev-parse HEAD)
+        REMOTE=$(git rev-parse @{u} 2>/dev/null) || exit 0
+        if [ "$LOCAL" != "$REMOTE" ]; then
+            BEHIND=$(git rev-list --count HEAD..@{u} 2>/dev/null)
+            [ "$BEHIND" -gt 0 ] && echo "dotfiles: remote has $BEHIND update(s)"
+        fi
+        ;;
     pull)
         echo "Pulling dotfiles from remote..."
         git pull --rebase
         echo "Dotfiles updated!"
-        echo "Run 'source ~/.zshrc' to reload shell config"
+        echo "Run 'source ~/dotfiles/shell/.zshrc' to reload"
         ;;
     push)
         echo "Syncing dotfiles..."

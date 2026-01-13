@@ -7,7 +7,7 @@
 	autocrlf = false
 	filemode = false
 	ignorecase = false
-	excludesfile = /home/yjcao/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	pager = delta
 
 [interactive]

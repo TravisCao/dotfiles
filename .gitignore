@@ -25,4 +25,4 @@ Thumbs.db
 # Local machine-specific configurations
 *.local
 .zshrc.local
-.bashrc.local
+.bashrc.localshell/.zcompdump

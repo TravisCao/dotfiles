@@ -21,6 +21,39 @@ fi
 
 echo "Detected OS: $OS"
 
+# ZDOTDIR architecture setup
+setup_zdotdir() {
+    echo "Setting up ZDOTDIR architecture..."
+
+    # Detect old symlink, perform migration
+    if [ -L "$HOME/.zshrc" ] && [[ "$(readlink "$HOME/.zshrc")" == *"dotfiles/shell"* ]]; then
+        echo "  Migrating from symlink setup..."
+        rm "$HOME/.zshrc"
+
+        if [ -f "$HOME/.zshrc.local" ]; then
+            mv "$HOME/.zshrc.local" "$HOME/.zshrc"
+            echo "  Moved .zshrc.local to .zshrc"
+        fi
+    fi
+
+    # Create initial ~/.zshrc if not exists
+    if [ ! -f "$HOME/.zshrc" ]; then
+        echo "  Creating initial ~/.zshrc..."
+        cat > "$HOME/.zshrc" << 'EOF'
+# Local config - machine-specific, not tracked by git
+# Tools will auto-write here
+
+EOF
+        if [[ "$OS" == "linux" ]]; then
+            echo '[ -d /home/linuxbrew/.linuxbrew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> "$HOME/.zshrc"
+        fi
+    fi
+
+    echo "  [ok] ZDOTDIR ready"
+}
+
+setup_zdotdir
+
 # Install Homebrew (both macOS and Linux)
 if ! command -v brew &> /dev/null; then
     echo "Installing Homebrew..."
@@ -28,25 +61,6 @@ if ! command -v brew &> /dev/null; then
 
     # Add Homebrew to PATH for current session
     eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
-
-    # Create .zshrc.local for Linux with Homebrew PATH
-    if [[ "$OS" == "linux" ]]; then
-        ZSHRC_LOCAL="$HOME/.zshrc.local"
-        if [ ! -f "$ZSHRC_LOCAL" ]; then
-            echo "Creating $ZSHRC_LOCAL..."
-            cat > "$ZSHRC_LOCAL" << 'EOF'
-# Machine-specific configurations
-
-# Homebrew (Linux)
-[ -d /home/linuxbrew/.linuxbrew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-EOF
-        elif ! grep -q "linuxbrew" "$ZSHRC_LOCAL"; then
-            echo "Adding Homebrew to $ZSHRC_LOCAL..."
-            echo '' >> "$ZSHRC_LOCAL"
-            echo '# Homebrew (Linux)' >> "$ZSHRC_LOCAL"
-            echo '[ -d /home/linuxbrew/.linuxbrew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> "$ZSHRC_LOCAL"
-        fi
-    fi
 else
     echo "[ok] Homebrew already installed"
 fi
@@ -157,4 +171,4 @@ git config --global core.excludesfile ~/.gitignore_global
 
 echo ""
 echo "Dotfiles initialization completed!"
-echo "Please restart your shell or run 'source ~/.zshrc' to apply changes"
+echo "Please restart your shell (ZDOTDIR: ~/dotfiles/shell)"

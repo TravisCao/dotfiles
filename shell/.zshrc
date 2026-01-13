@@ -55,8 +55,9 @@ if command -v delta &>/dev/null; then
 fi
 
 # Aliases
-alias zshrc="vim ~/.zshrc"
-alias sz="source ~/.zshrc"
+alias zshrc="vim ~/dotfiles/shell/.zshrc"
+alias zshlocal="vim ~/.zshrc"
+alias sz="source ~/dotfiles/shell/.zshrc"
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -71,17 +72,17 @@ if [ -d "$HOMEBREW_PREFIX/opt/fnm/bin" ]; then
 fi
 
 # Load machine-specific local configurations
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+# In ZDOTDIR architecture, ~/.zshrc is the local config file
+[ -f ~/.zshrc ] && source ~/.zshrc
 
-# Dotfiles change detection
-if [ -d ~/dotfiles ] && [ -n "$(git -C ~/dotfiles status --porcelain 2>/dev/null)" ]; then
-    echo "dotfiles 有未同步的改动，运行 ~/dotfiles/sync.sh push"
+# Dotfiles sync detection
+if [ -d ~/dotfiles ]; then
+    # Local changes
+    [ -n "$(git -C ~/dotfiles status --porcelain 2>/dev/null)" ] && \
+        echo "dotfiles: local changes detected"
+    # Remote updates (async, no startup delay)
+    (~/dotfiles/sync.sh check &) 2>/dev/null
 fi
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
-[ -d "$BUN_INSTALL/bin" ] && export PATH="$BUN_INSTALL/bin:$PATH"
 
 # opencode
 [ -d "$HOME/.opencode/bin" ] && export PATH="$HOME/.opencode/bin:$PATH"

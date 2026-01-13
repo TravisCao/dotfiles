@@ -25,4 +25,8 @@ Thumbs.db
 # Local machine-specific configurations
 *.local
 .zshrc.local
-.bashrc.localshell/.zcompdump
+.bashrc.local
+
+# Zsh generated files (machine-specific, should not be synced)
+shell/.zcompdump*
+shell/.zsh_history

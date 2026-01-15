@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# /// script
+# dependencies = ["requests"]
+# ///
 """
 Citation Validation Tool
 Validate BibTeX files for accuracy, completeness, and format compliance.

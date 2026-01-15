@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# /// script
+# dependencies = ["requests"]
+# ///
 """
 Metadata Extraction Tool
 Extract citation metadata from DOI, PMID, arXiv ID, or URL using various APIs.

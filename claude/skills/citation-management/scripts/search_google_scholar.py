@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
+# /// script
+# dependencies = ["scholarly"]
+# ///
 """
 Google Scholar Search Tool
 Search Google Scholar and export results.
-
-Note: This script requires the 'scholarly' library.
-Install with: pip install scholarly
 """
 
 import sys
@@ -19,7 +19,6 @@ try:
     SCHOLARLY_AVAILABLE = True
 except ImportError:
     SCHOLARLY_AVAILABLE = False
-    print('Warning: scholarly library not installed. Install with: pip install scholarly', file=sys.stderr)
 
 class GoogleScholarSearcher:
     """Search Google Scholar using scholarly library."""
@@ -235,10 +234,7 @@ def main():
     args = parser.parse_args()
     
     if not SCHOLARLY_AVAILABLE:
-        print('\nError: scholarly library not installed', file=sys.stderr)
-        print('Install with: pip install scholarly', file=sys.stderr)
-        print('\nAlternatively, use PubMed search for biomedical literature:', file=sys.stderr)
-        print('  python search_pubmed.py "your query"', file=sys.stderr)
+        print('\nError: scholarly library not available', file=sys.stderr)
         sys.exit(1)
     
     # Search

@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# /// script
+# dependencies = ["requests"]
+# ///
 """
 DOI to BibTeX Converter
 Quick utility to convert DOIs to BibTeX format using CrossRef API.

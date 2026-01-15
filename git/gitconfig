@@ -7,7 +7,7 @@
 	autocrlf = false
 	filemode = false
 	ignorecase = false
-	excludesfile = /Users/travis/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	pager = delta
 
 [interactive]
@@ -42,17 +42,11 @@
 
 [color]
 	ui = auto
-
-[credential "https://github.com"]
-	helper =
-	helper = !gh auth git-credential
-
-[credential "https://gist.github.com"]
-	helper =
-	helper = !gh auth git-credential
-
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+# Credential helpers are in ~/.gitconfig (local)
+# This file is included via [include] from local config

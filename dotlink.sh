@@ -20,8 +20,8 @@ declare -a LINK_MAP=(
     "shell/bashrc:$HOME/.bashrc"
     # Tmux
     "tmux/tmux.conf:$HOME/.tmux.conf"
-    # Git
-    "git/gitconfig:$HOME/.gitconfig"
+    # Git - local includes shared (like ZDOTDIR pattern)
+    # ~/.gitconfig is local, includes ~/dotfiles/git/gitconfig
     "git/gitignore_global:$HOME/.gitignore_global"
     # Claude
     "claude/CLAUDE.md:$HOME/.claude/CLAUDE.md"
@@ -89,9 +89,73 @@ for entry in "${LINK_MAP[@]}"; do
     link_file "$source" "$target"
 done
 
-# Set global gitignore
+# Setup local gitconfig (like ZDOTDIR pattern for zshrc)
+setup_local_gitconfig() {
+    local gitconfig="$HOME/.gitconfig"
+    local shared_config="$DOTFILES_DIR/git/gitconfig"
+
+    # Remove old symlink if exists (only if it points to our shared config)
+    if [ -L "$gitconfig" ]; then
+        local symlink_target=$(readlink "$gitconfig")
+        if [[ "$symlink_target" == *"dotfiles/git/gitconfig"* ]]; then
+            echo "Migrating gitconfig from symlink to local+include..."
+            rm "$gitconfig"
+        else
+            echo "WARNING: ~/.gitconfig is a symlink to: $symlink_target"
+            echo "         Expected it to point to dotfiles/git/gitconfig"
+            echo "         Please manually migrate this configuration."
+            return 1
+        fi
+    fi
+
+    # Create local gitconfig if not exists
+    if [ ! -f "$gitconfig" ]; then
+        echo "Creating local ~/.gitconfig..."
+        cat > "$gitconfig" << EOF
+# Local git config - machine-specific, not tracked by git
+# Tools will auto-write here (gh, etc.)
+
+[include]
+    path = ~/dotfiles/git/gitconfig
+
+# Machine-specific settings below
+EOF
+        echo "[ok] Created ~/.gitconfig with include"
+    else
+        # Check if include already exists using git config parser
+        if ! git config -f "$gitconfig" --get-all include.path 2>/dev/null | grep -q "dotfiles/git/gitconfig"; then
+            echo "Adding include to existing ~/.gitconfig..."
+
+            # Warn about potential conflicts
+            echo ""
+            echo "WARNING: Existing ~/.gitconfig will be merged with shared config."
+            echo "         Settings AFTER [include] override shared config."
+            echo "         Review ~/.gitconfig to remove duplicates of:"
+            echo "           - [user] name/email"
+            echo "           - [core] editor/pager"
+            echo ""
+
+            # Prepend include to existing config
+            local temp_file=$(mktemp)
+            cat > "$temp_file" << EOF
+# Local git config - machine-specific, not tracked by git
+
+[include]
+    path = ~/dotfiles/git/gitconfig
+
+# Settings below override shared config
+EOF
+            cat "$gitconfig" >> "$temp_file"
+            mv "$temp_file" "$gitconfig"
+            echo "[ok] Added include to ~/.gitconfig"
+        else
+            echo "[ok] ~/.gitconfig already has include"
+        fi
+    fi
+}
+
 if ! $DRY_RUN; then
-    git config --global core.excludesfile ~/.gitignore_global 2>/dev/null || true
+    setup_local_gitconfig
 fi
 
 echo ""

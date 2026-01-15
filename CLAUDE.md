@@ -50,20 +50,33 @@ uv run python -m pytest tests/unit/test_xx.py -v
 
 ### ZDOTDIR Architecture
 
-The dotfiles uses ZDOTDIR to separate shared and local configurations:
+The dotfiles uses **local-includes-shared** pattern to separate shared and local configurations:
 
+**Shell (ZDOTDIR)**:
 ```
-~/.zshenv                   → symlink to shell/.zshenv (sets ZDOTDIR)
-~/dotfiles/shell/.zshrc     → shared config (git-tracked)
-~/.zshrc                    → local config (NOT git-tracked)
+~/.zshenv                   -> symlink to shell/.zshenv (sets ZDOTDIR)
+~/dotfiles/shell/.zshrc     -> shared config (git-tracked)
+~/.zshrc                    -> local config (NOT git-tracked)
 ```
 
-**Load order**: `~/.zshenv` → `$ZDOTDIR/.zshrc` → `source ~/.zshrc`
+**Git**:
+```
+~/.gitconfig                -> local config (NOT git-tracked)
+    [include] path = ...    <- shared config loaded here
+    [credential] ...        <- local settings override shared
+~/dotfiles/git/gitconfig    -> shared config (git-tracked)
+```
+
+**Load order**:
+- Shell: `~/.zshenv` -> `$ZDOTDIR/.zshrc` -> `source ~/.zshrc`
+- Git: `~/.gitconfig` processes `[include]` first, then local settings override
 
 **Benefits**:
-- Tools auto-modifying `.zshrc` write to `~/.zshrc` (local), not polluting shared config
+- Tools auto-modifying configs write to local files, not polluting shared config
 - No merge conflicts between mac/linux machines
 - Clean separation of shared vs machine-specific settings
+
+**IMPORTANT for AI assistants**: When modifying git config, write to `~/.gitconfig` (local), NOT `~/dotfiles/git/gitconfig` (shared). Machine-specific settings like credential helpers belong in local config. Settings placed AFTER `[include]` in local config will override shared config.
 
 ### Directory Structure
 - **shell/**: Shell configurations (zsh)
@@ -83,13 +96,13 @@ The dotfiles uses ZDOTDIR to separate shared and local configurations:
 
 ### Key Design Principles
 
-**ZDOTDIR Separation**: Shared configurations live in `~/dotfiles/shell/.zshrc` (git-tracked), while machine-specific settings go in `~/.zshrc` (local, not tracked). This prevents tools from polluting shared config.
+**Local-Includes-Shared Pattern**: Both shell and git use the same pattern - local config files (NOT tracked) include/source shared config (tracked). This prevents tools from polluting shared config.
 
-**Symlink-Based Installation**: Uses symbolic links for configs that don't support ZDOTDIR (git, tmux, claude).
+**Symlink-Based Installation**: Uses symbolic links for configs that don't support include patterns (tmux, claude).
 
 **Auto-Installation Dependencies**: The init script automatically handles missing dependencies (zsh, Oh My Zsh, fzf) with platform detection for macOS and Linux.
 
-**Automatic Migration**: Running `init.sh` on existing setups automatically migrates from old symlink-based `.zshrc.local` pattern to new ZDOTDIR pattern.
+**Automatic Migration**: Running `init.sh` on existing setups automatically migrates from old symlink-based patterns to new local-includes-shared pattern.
 
 ### Configuration Management
 
@@ -101,10 +114,10 @@ The dotfiles uses ZDOTDIR to separate shared and local configurations:
 - Sync detection on shell startup (local changes + remote updates)
 
 **Git Configuration**:
-- Clean, minimal configuration
+- Uses local-includes-shared pattern (`~/.gitconfig` includes `~/dotfiles/git/gitconfig`)
+- Shared config: delta, merge/diff tools, pull/push settings
+- Local config: credential helpers, machine-specific paths
 - Global gitignore covering common research files (data, logs, checkpoints)
-- VS Code integration for merge and diff tools
-- GitHub CLI credential management
 - Rebase-based pull strategy
 
 **Claude Integration**:
@@ -123,6 +136,7 @@ This repository follows a PhD student's research-focused development approach:
 ## Important Notes
 
 - The repository is designed for research environments, not production systems
-- Local config (`~/.zshrc`) should be used for sensitive or machine-specific configurations
+- Local configs (`~/.zshrc`, `~/.gitconfig`) should be used for sensitive or machine-specific configurations
+- When modifying git settings, write to `~/.gitconfig` (local), not `~/dotfiles/git/gitconfig` (shared)
 - The sync script automatically commits and pushes changes to maintain backup
 - Shell startup checks for both local changes and remote updates

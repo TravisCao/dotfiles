@@ -19,7 +19,9 @@ cd ~/dotfiles
 
 ## Architecture
 
-This dotfiles uses **ZDOTDIR** to separate shared and local configurations:
+This dotfiles uses **local-includes-shared** pattern to separate shared and local configurations:
+
+### Shell (ZDOTDIR)
 
 ```
 ~/.zshenv          -> ~/dotfiles/shell/.zshenv (sets ZDOTDIR)
@@ -31,14 +33,28 @@ This dotfiles uses **ZDOTDIR** to separate shared and local configurations:
 ~/.zshrc                  (local config, NOT git-tracked)
 ```
 
+### Git
+
+```
+~/.gitconfig              (local config, NOT git-tracked)
+    |
+    | [include] path = ~/dotfiles/git/gitconfig  <- loaded first
+    | [credential] ...                            <- overrides shared
+    v
+~/dotfiles/git/gitconfig  (shared config, git-tracked)
+```
+
 **Benefits**:
-- Tools that auto-modify `.zshrc` write to `~/.zshrc` (local), not polluting shared config
+- Tools that auto-modify configs write to local files, not polluting shared config
 - Shared config stays clean and syncs across machines via git
 - No merge conflicts between machines
+- Settings after `[include]` in local config override shared settings
 
 ## Machine-Specific Configuration
 
-Local configurations go in `~/.zshrc` (created automatically by `init.sh`):
+Local configurations are created automatically by `init.sh`:
+
+### Shell (`~/.zshrc`)
 
 ```bash
 # Example ~/.zshrc (local)
@@ -54,10 +70,23 @@ export PATH="$GUROBI_HOME/bin:$PATH"
 alias myproject="cd /path/to/my/project"
 ```
 
-This file is:
-- Automatically sourced by the shared config
+### Git (`~/.gitconfig`)
+
+```ini
+# Example ~/.gitconfig (local)
+
+[include]
+    path = ~/dotfiles/git/gitconfig
+
+# Credential helper (machine-specific path)
+[credential "https://github.com"]
+    helper = !/opt/homebrew/bin/gh auth git-credential
+```
+
+These files are:
+- Automatically created/sourced by init.sh
 - NOT tracked by git
-- Safe for tools to auto-modify (bun, nvm, etc.)
+- Safe for tools to auto-modify (gh, bun, nvm, etc.)
 
 ## Syncing
 

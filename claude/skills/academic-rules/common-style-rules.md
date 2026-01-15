@@ -17,12 +17,11 @@ These rules apply to ALL sections of Travis's papers.
 ### 2. Preferred Word Choices
 | Avoid | Use Instead |
 |-------|-------------|
-| utilize | use |
-| leverage | use, apply |
-| facilitate | enable, allow |
 | demonstrate (alone) | show, validate |
 | methodology | method |
 | advantageous | beneficial |
+
+> For AI-specific word patterns (utilize, leverage, facilitate, etc.), see `~/.claude/skills/academic-rules/ai-writing-mistakes-to-avoid.md`
 
 **For verification statements:** Use "validate" not just "show"
 - ✅ "Case studies validate the theoretical results"
@@ -33,9 +32,10 @@ These rules apply to ALL sections of Travis's papers.
 - ❌ "revolutionary approach"
 - ❌ "paradigm-shifting method"
 - ❌ "completely/totally/fundamentally changes"
-- ❌ "groundbreaking"
 - ❌ "unprecedented"
 - ❌ "novel" (unless you can prove no one has done it before)
+
+> For more promotional words to avoid (groundbreaking, etc.), see `~/.claude/skills/academic-rules/ai-writing-mistakes-to-avoid.md`
 
 **Instead, be specific and measured:**
 - ✅ "This method reduces computation time by 40%"
@@ -47,9 +47,9 @@ These rules apply to ALL sections of Travis's papers.
 - ❌ "paves the way for"
 - ❌ "sheds light on"
 - ❌ "bridges the gap between"
-- ❌ "stem from" / "stems from"
 - ✅ Be direct: "This approach enables X" or "This method shows Y"
-- ✅ Instead of "stem from": use "result from", "arise from", "are caused by"
+
+> For AI-specific phrases (stem from, etc.), see `~/.claude/skills/academic-rules/ai-writing-mistakes-to-avoid.md`
 
 ### 5. Punctuation Rules
 - **No em-dashes (—)** in formal academic writing
@@ -115,3 +115,7 @@ Before finalizing ANY section, verify:
 - [ ] Abbreviations consistent (full form first, then abbreviation only)
 - [ ] Each paragraph has clear topic sentence
 - [ ] Logical flow between sentences
+
+## Related Reference
+
+**Also read:** `~/.claude/skills/academic-rules/ai-writing-mistakes-to-avoid.md` for comprehensive guide on AI writing patterns to avoid (overused words, sentence patterns, formatting issues).

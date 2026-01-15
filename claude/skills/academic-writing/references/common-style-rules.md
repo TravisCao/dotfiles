@@ -47,9 +47,18 @@ These rules apply to ALL sections of Travis's papers.
 - ❌ "paves the way for"
 - ❌ "sheds light on"
 - ❌ "bridges the gap between"
+- ❌ "stem from" / "stems from"
 - ✅ Be direct: "This approach enables X" or "This method shows Y"
+- ✅ Instead of "stem from": use "result from", "arise from", "are caused by"
 
-### 5. Abbreviation Consistency
+### 5. Punctuation Rules
+- **No em-dashes (—)** in formal academic writing
+  - ❌ "The method — which is novel — improves accuracy"
+  - ✅ Use commas: "The method, which is novel, improves accuracy"
+  - ✅ Use parentheses: "The method (which is novel) improves accuracy"
+  - ✅ Split into two sentences if the aside is long
+
+### 6. Abbreviation Consistency
 **Critical pattern:**
 - First mention: "Optimal Power Flow (OPF)"
 - All subsequent uses: "OPF" (never switch back to full form)
@@ -102,6 +111,7 @@ Before finalizing ANY section, verify:
 - [ ] No fancy words that could be simpler
 - [ ] No overclaiming ("revolutionary", "paradigm", etc.)
 - [ ] No metaphors
+- [ ] No em-dashes (use commas or parentheses)
 - [ ] Abbreviations consistent (full form first, then abbreviation only)
 - [ ] Each paragraph has clear topic sentence
 - [ ] Logical flow between sentences

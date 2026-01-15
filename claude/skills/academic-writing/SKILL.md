@@ -16,6 +16,7 @@ This skill helps write academic papers for power systems and quantum computing r
 - **Methodology writing** → Read `references/methodology-writing.md`
 - **Case study/results** → Read `references/case-study-writing.md`
 - **Conclusion** → Read `references/conclusion-writing.md`
+- **LaTeX tables** → Read `references/latex-tables.md`
 
 **Always apply** → Read `references/common-style-rules.md` for universal writing guidelines
 

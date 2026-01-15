@@ -49,3 +49,8 @@ PhD research code. Prioritize speed and validation over production polish.
 - Use time MCP server to get current time in HKT timezone
 - Format: `- [ ] Task description (YYYY-MM-DD HH:MM)`
 - This helps track when tasks were created
+
+## Plan Mode
+- Make the plan extremely concise. Sacrifice grammar for the sake of concision.
+- At the end of each plan, give me a list of unresolved questions to answer, if any.
+

@@ -1,3 +1,9 @@
+---
+version: 1.1.0
+updated: 2026-01-15
+recent: Added Results Subsection Pattern, Citation Framework, Pre-Writing Checklist
+---
+
 # Case Study and Results Writing
 
 ## Purpose
@@ -16,11 +22,11 @@ Present experimental setup and results systematically and reproducibly.
    - Algorithm parameters
    - Quantum circuit configuration
    - Privacy parameters (ε, δ)
-   
+
 3. **Baseline Comparison**
    - What are we comparing against?
    - Why these baselines?
-   
+
 4. **Evaluation Metrics**
    - What are we measuring?
    - Why these metrics?
@@ -29,14 +35,43 @@ Present experimental setup and results systematically and reproducibly.
 1. **Main Results**
    - Present key findings
    - Use tables and figures
-   
+
 2. **Analysis**
    - Interpret results
    - Compare to baselines
-   
+
 3. **Ablation Studies** (if applicable)
    - Component-wise analysis
    - Sensitivity to parameters
+
+## Results Subsection Pattern
+
+### Leading Paragraph
+
+Every results subsection needs a strong opening with:
+1. **Motivation**: Why this analysis matters (what problem it addresses)
+2. **Structure preview**: What this subsection covers
+
+❌ **Too weak:**
+"Region classification enables substantial qubit reduction."
+
+✅ **Strong:**
+"Practical deployment on near-term quantum hardware faces two constraints: limited qubit counts and the need for real-time dispatch. This subsection analyzes how region-based classification addresses both, comparing qubit requirements and evaluating runtime speedup."
+
+### Claim Pattern: Setting → Data → Interpretation
+
+Each claim in a results subsection follows this structure:
+
+| Step | Purpose | Example |
+|------|---------|---------|
+| Setting | Context for this specific result | "For the 69-bus system..." |
+| Data | Key numbers from table/figure | "requires 596 qubits at b=4" |
+| Interpretation | What it means | "exceeding NISQ's ~100-qubit limit" |
+
+**One claim per paragraph.** Never mix multiple claims.
+
+**Default behavior:** Follow this pattern strictly.
+**Exception:** If Claude is >70% confident a different structure works better, ask the user before deviating.
 
 ## Travis's Approach: "Narratively but also let tables/figures speak"
 
@@ -56,6 +91,16 @@ Present experimental setup and results systematically and reproducibly.
 - **Text**: Highlights key takeaways, patterns, or surprises
 - **Don't repeat**: If it's obvious from the figure, don't re-state in words
 - **Do interpret**: Explain non-obvious patterns or implications
+
+## Interpretation Principle
+
+Don't just describe data—explain its significance.
+
+❌ **Description only:**
+"Table X shows direct QUBO requires 596 qubits while our method requires 5."
+
+✅ **With interpretation:**
+"Direct QUBO requires 596 qubits at minimum precision—far exceeding the ~100-qubit limit of current NISQ devices. Our method requires only 5 qubits, enabling deployment on existing hardware."
 
 ## Writing Style
 
@@ -108,13 +153,51 @@ Choose organization that serves the paper's narrative.
 ❌ "Figure 2 shows the results."
 ✅ "Figure 2 shows that computation time scales linearly with network size, indicating good scalability."
 
-## To Develop Through Iteration
+### 4. Weak Leading Paragraphs
+❌ One sentence that jumps straight to results
+✅ Motivation + structure preview before diving in
 
-*As Travis writes results sections, add:*
-- Preferred table formatting styles
-- Examples of good figure captions
-- Patterns for presenting privacy-utility trade-offs
-- Standard performance metrics for power systems papers
+### 5. Mixed Claims
+❌ Qubit efficiency and speedup discussed in same paragraph
+✅ One claim per paragraph with complete setting→data→interpretation chain
+
+### 6. Data-Description Mismatch
+❌ "Even with conservative estimates of b=4" (when b=4 is the minimum in table)
+✅ Use accurate descriptors: "minimum", "moderate", "maximum" matching actual data
+
+## Citation Judgment Framework
+
+Before making an assumption or claim, ask:
+
+1. **Is this widely accepted in the field?**
+   - Yes → May not need citation
+   - No → Continue to question 2
+
+2. **Would a reviewer ask "where did this come from"?**
+   - Yes → Need citation or detailed explanation
+   - No → Can omit
+
+3. **Can I explain it in one sentence without a citation?**
+   - Yes → Write the explanation
+   - No → Must find citation
+
+## Pre-Writing Checklist
+
+### Structure
+- [ ] Leading paragraph has motivation + structure preview
+- [ ] Each claim has complete setting → data → interpretation
+- [ ] No two claims mixed in same paragraph
+
+### Data Consistency
+- [ ] Text descriptions match table/figure numbers exactly
+- [ ] Descriptors accurate (minimum/moderate/maximum match data)
+
+### Citations
+- [ ] Assumptions that reviewers would question have support
+
+### Language
+- [ ] No overclaiming ("dramatically", "revolutionary")
+- [ ] Numbers specific, not vague ("9,975×" not "nearly 10,000×")
 
 ## Apply Common Rules
 

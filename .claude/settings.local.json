@@ -4,7 +4,8 @@
       "Read(/home/yjcao/**)",
       "Bash(command -v:*)",
       "WebSearch",
-      "Skill(commit)"
+      "Skill(commit)",
+      "Skill(superpowers:brainstorming)"
     ],
     "deny": [],
     "ask": []

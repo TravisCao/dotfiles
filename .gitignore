@@ -30,3 +30,4 @@ Thumbs.db
 # Zsh generated files (machine-specific, should not be synced)
 shell/.zcompdump*
 shell/.zsh_history
+shell/.zsh_sessions/
